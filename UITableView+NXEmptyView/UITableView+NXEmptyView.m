@@ -20,9 +20,9 @@ void nxEV_swizzle(Class c, SEL orig, SEL new)
 {
     Method origMethod = class_getInstanceMethod(c, orig);
     Method newMethod = class_getInstanceMethod(c, new);
-    if(class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
+    if(class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod))) {
         class_replaceMethod(c, new, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
-    else{
+    } else {
         method_exchangeImplementations(origMethod, newMethod);
         method_exchangeImplementations(newMethod, origMethod);
     }
